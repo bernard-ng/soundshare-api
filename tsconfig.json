@@ -6,8 +6,11 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "moduleResolution": "node",
-        "target": "ES2020",
-        "strict": true
+        "target": "ES2015",
+        "strict": true,
+        "lib": [
+            "ESNext.BigInt"
+        ]
     },
     "include": [
         "src/**/*"
