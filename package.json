@@ -9,7 +9,10 @@
     "private": false,
     "scripts": {
         "dev": "concurrently -k -n \"Typescrit,Node\" -p \"[{name}]\" -c \"blue.bold,green.bold\" \"tsc --watch\" \"nodemon dist/index.js\"",
-        "tslint": "tslint -c tslint.json -p tsconfig.json"
+        "start": "nodemon dist/index.js",
+        "build": "tsc",
+        "tslint": "tslint -c tslint.json -p tsconfig.json",
+        "tslint-fix": "tslint --fix -c tslint.json -p tsconfig.json"
     },
     "dependencies": {
         "dotenv": "^8.2.0",
