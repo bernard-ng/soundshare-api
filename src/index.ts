@@ -1,4 +1,4 @@
-import fs from 'fs'
+import cors from 'cors'
 import path from 'path'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
@@ -16,7 +16,11 @@ dotenv.config({
 const app = express()
 const port = process.env.APP_PORT || 3000
 
+// middlewares
+app.use(cors({ origin: 'http://localhost:8100' }))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+// routes
 app.get('/music', MusicController.index)
 app.get('/music/:directory/:hash?', MusicController.show)
 app.get('*', (request: Request, response: Response) => response.redirect('/music'))

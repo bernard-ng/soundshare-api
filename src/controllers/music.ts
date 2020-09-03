@@ -12,12 +12,9 @@ interface HashedFile {
 const database = path.resolve(process.cwd(), 'database.json')
 
 export const index = async (request: Request, response: Response) => {
-  fs.promises.readFile(database, 'utf8')
-    .then(data => response.json(JSON.parse(data)))
-    .catch(error => {
-      console.error({ error })
-      return response.json({ error: 'error while reading database' })
-    })
+  const rows = await fs.promises.readFile(database, 'utf8')
+  const data = JSON.parse(rows) as HashedFile
+  return response.json(data.children)
 }
 
 export const show = async (request: Request, response: Response) => {
