@@ -17,7 +17,12 @@ const app = express()
 const port = process.env.APP_PORT || 3000
 
 // middlewares
-app.use(cors({ origin: 'http://localhost:8100' }))
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 // routes
