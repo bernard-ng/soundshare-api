@@ -2,7 +2,7 @@ import cors from 'cors'
 import path from 'path'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
-import express, { Request, Response } from 'express'
+import express, {Request, Response} from 'express'
 import ErrorMiddleware from './middlewares/error'
 
 import * as MusicController from './controllers/music'
@@ -15,6 +15,7 @@ dotenv.config({
 
 const app = express()
 const port = process.env.APP_PORT || 3000
+const host = process.env.APP_HOST || '0.0.0.0'
 
 // middlewares
 app.use(cors({
@@ -31,4 +32,4 @@ app.get('/music/:directory/:hash?', MusicController.show)
 app.get('*', (request: Request, response: Response) => response.redirect('/music'))
 
 app.use(ErrorMiddleware)
-app.listen(port, () => console.log(`soundshare api is up and running on port : ${port}`))
+app.listen(port as number, host, () => console.log(`soundshare api is up and listening => ${host}:${port}`))
